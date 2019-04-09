@@ -33,7 +33,7 @@ public class Banco extends UnicastRemoteObject
             consultaBanco = new Banco();
             consultaBanco.tablaCotizaciones();
             Naming.bind("ConsultaBanco", consultaBanco);
-            System.out.println("El servidor esta listo\n");
+            System.out.println("El Banco a abierto..\n");
         } catch (MalformedURLException | AlreadyBoundException | RemoteException e) {
             System.err.println(e.getMessage());
         }

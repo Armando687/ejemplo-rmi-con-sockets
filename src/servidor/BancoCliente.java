@@ -59,17 +59,22 @@ public class BancoCliente {
     
     public  String Cuentas(String cadena){
         String lista;
-        String resultado="";
+//        System.err.println(cadena);
+//        System.err.println(users.get(1));
+        String resultado= users.get(Integer.parseInt(cadena)-1);
+        String aux="";
         String[] cuenta;
-        for (int i = 0; i < users.size(); i++) {
-            lista = users.get(i);
-            cuenta = lista.split(";");
-            if(cadena.equals(cuenta[0])){
-                resultado = lista;
-            }else{
-                resultado = "0";
-            }
-        }
+        
+//        for (int i = 0; i < users.size(); i++) {
+//            lista = users.get(i);
+//            cuenta = lista.split(",");
+//            System.out.println(cuenta[0]);
+//            if(cadena.equals(aux + cuenta[0])){
+//                resultado = lista;
+//            }else{
+//                resultado = "0";
+//            }
+//        }
         return resultado;
     }
     /**

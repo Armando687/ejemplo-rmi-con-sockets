@@ -31,7 +31,7 @@ public class Server extends UnicastRemoteObject implements MethodServer{
     public static void main(String args[]){
         try {
             Server hotel;
-            LocateRegistry.createRegistry(1099);
+            LocateRegistry.createRegistry(5001);
             hotel = new Server();
             hotel.tablaPrecios();
             Naming.bind("Hotel", hotel);
@@ -88,8 +88,13 @@ public class Server extends UnicastRemoteObject implements MethodServer{
     @Override
     public String Reservar(String inicio, String fin, String idCliente, String fechaDeCompra){
         int port = 2027; // puerto de comunicacion
-        String result = "";
+        String result;
+        String message = "";
+        String[] dato; 
+        double rs ;
+        double monto;
         try{
+            monto = Double.parseDouble(Cotizar(inicio, fin, fechaDeCompra));
             Socket client = new Socket("localhost", port); //conectarse al socket
             InputStreamReader isr = new InputStreamReader(System.in);
             BufferedReader br = new BufferedReader(isr);
@@ -97,12 +102,21 @@ public class Server extends UnicastRemoteObject implements MethodServer{
             BufferedReader fromServer = new BufferedReader(new InputStreamReader(client.getInputStream()));
             toServer.println(idCliente);  //mandar alservidor 
             result = fromServer.readLine();  // devolver del servidor
+            
+            dato = result.split(",");
+            rs = Double.parseDouble(dato[1]);//saldo
+            int comparacion = Double.compare(rs, monto);
+            if(comparacion > 0){
+                message = "Compra Exitosa";
+            }else{
+                message = "Compra Fallida";
+            }
         }
         catch(IOException e){
             System.out.println(e.getMessage());
         }
         
-        return result;
+        return message;
     }
     
     public void tablaPrecios(){
