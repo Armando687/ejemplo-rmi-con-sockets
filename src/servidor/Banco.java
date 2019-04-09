@@ -40,17 +40,15 @@ public class Banco extends UnicastRemoteObject
     }
 
     @Override
-    public String cotizarDolar(String fecha)  {
+    public double cotizarDolar(String fecha)  {
         String cotizacionDia;
         String[] dato;
-        String valor = "";
+        double valor = 0.0;
         for (int i = 0; i < tabla.size(); i++) {
             cotizacionDia= tabla.get(i);
             dato = cotizacionDia.split(",");
             if(fecha.equals(dato[0])){
-                valor = dato[1];
-            }else{
-                valor="0";
+                valor = Double.parseDouble(dato[1]);
             }
         }
         return valor;

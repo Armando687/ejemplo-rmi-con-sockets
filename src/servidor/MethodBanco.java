@@ -13,5 +13,5 @@ import java.rmi.RemoteException;
  * @author jose
  */
 public interface MethodBanco extends Remote{
-    String cotizarDolar(String fecha)throws RemoteException;
+    double cotizarDolar(String fecha)throws RemoteException;
 }
